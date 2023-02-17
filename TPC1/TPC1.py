@@ -23,7 +23,7 @@ def main():
                 temDoenca[key] = paciente[5]
                 key += 1
 
-    distDoencaSexo(sexo,temDoenca)
+    distDoencaIdade(idade,temDoenca)
 
         
             
@@ -73,6 +73,44 @@ def distDoencaSexo(sexo,temDoenca):
     print(f"Total de mulheres: {total_mulheres}")
     print(f"Proporção de homens com a doença: {proporcao_doencas_homens:.2%}")
     print(f"Proporção de mulheres com a doença: {proporcao_doencas_mulheres:.2%}")
+
+
+def distDoencaIdade(idade,temDoenca):
+    total_doentes = 0
+    conta_idade = dict()
+    conta_idade = {'[30-34]': 0, '[35-39]': 0, '[40-44]': 0, '[45-49]': 0, '[50-54]': 0, '[55-59]': 0, '[60-64]': 0, '[65-69]': 0, '[70+]': 0}
+    
+    for key in idade:
+        idade_paciente = int(idade[key])
+        if idade_paciente >= 30 and idade_paciente < 35:
+            faixa_etaria='[30-34]'
+        elif idade_paciente >= 35 and idade_paciente < 40:
+            faixa_etaria='[35-39]'
+        elif idade_paciente >= 40 and idade_paciente < 45:
+            faixa_etaria='[40-44]'
+        elif idade_paciente >= 45 and idade_paciente < 50:
+            faixa_etaria='[45-49]' 
+        elif idade_paciente >= 50 and idade_paciente < 55:
+            faixa_etaria='[50-54]'
+        elif idade_paciente >= 55 and idade_paciente < 60:
+            faixa_etaria='[55-59]'
+        elif idade_paciente >= 60 and idade_paciente < 65:
+            faixa_etaria='[60-64]'
+        elif idade_paciente >= 65 and idade_paciente < 70:
+            faixa_etaria='[65-69]' 
+        else:
+            faixa_etaria='[70+]'
+        
+        if int(temDoenca[key]) == 1:
+            conta_idade[faixa_etaria] += 1
+            total_doentes += 1
+
+    
+    print('Distribuição de doença por faixa etária:')
+    for faixa_etaria in conta_idade:
+        proporcao = conta_idade[faixa_etaria]/total_doentes
+        print(f'{faixa_etaria}: {proporcao:.2%}')
+
 
 
 
