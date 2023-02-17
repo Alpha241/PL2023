@@ -1,10 +1,5 @@
 
 def main():
-    readfile()
-
-
-
-def readfile():
     idade = dict()
     sexo = dict()
     tensao = dict()
@@ -27,7 +22,9 @@ def readfile():
                 batimento[key] = paciente[4]
                 temDoenca[key] = paciente[5]
                 key += 1
-        
+
+    distDoencaSexo(sexo,temDoenca)
+
         
             
 
@@ -48,6 +45,47 @@ def validaDados(lista):
         return False
     else:
         return True
-    
+
+
+def distDoencaSexo(sexo,temDoenca):
+    total_pacientes=len(sexo)
+    total_homens = 0
+    total_mulheres = 0
+    doenca_homens = 0
+    doenca_mulheres = 0
+
+    for i in range(total_pacientes):
+        if sexo[i] == 'M' and int(temDoenca[i]) == 1:
+            total_homens += 1
+        elif sexo[i] == 'M':
+            doenca_homens += 1
+        elif sexo[i] == 'F' and int(temDoenca[i]) == 1:
+            doenca_mulheres += 1
+        elif sexo[i] == 'F':
+            total_mulheres += 1
+
+    proporcao_doencas_homens = doenca_homens / total_homens
+    proporcao_doencas_mulheres = doenca_mulheres / total_mulheres
+
+    print(doenca_homens)
+    print(f"Total pacientes : {total_pacientes}")
+    print(f"Total de homens: {total_homens}")
+    print(f"Total de mulheres: {total_mulheres}")
+    print(f"Proporção de homens com a doença: {proporcao_doencas_homens:.2%}")
+    print(f"Proporção de mulheres com a doença: {proporcao_doencas_mulheres:.2%}")
+
+
 
 main()
+
+
+
+
+
+
+
+
+
+
+
+
