@@ -3,7 +3,7 @@ def main():
     idade = dict()
     sexo = dict()
     tensao = dict()
-    colestrol = dict()
+    colesterol = dict()
     batimento = dict()
     temDoenca = dict()
     
@@ -18,12 +18,12 @@ def main():
                 idade[key] = paciente[0]
                 sexo[key] = paciente[1]
                 tensao[key] = paciente[2]
-                colestrol[key] = paciente[3]
+                colesterol[key] = paciente[3]
                 batimento[key] = paciente[4]
                 temDoenca[key] = paciente[5]
                 key += 1
 
-    distDoencaIdade(idade,temDoenca)
+    distNivelColestrol(colesterol,temDoenca)
 
         
             
@@ -110,6 +110,25 @@ def distDoencaIdade(idade,temDoenca):
     for faixa_etaria in conta_idade:
         proporcao = conta_idade[faixa_etaria]/total_doentes
         print(f'{faixa_etaria}: {proporcao:.2%}')
+
+def distNivelColestrol(colesterol,temDoenca):
+    conta_colesterol = {}
+    pacientes =  len(colesterol)
+
+    for i in range(pacientes):
+        nivel_colesterol = int(int(colesterol[i]) / 10) * 10
+        if nivel_colesterol not in conta_colesterol:
+            conta_colesterol[nivel_colesterol] = {"total":0, "doentes": 0}
+        conta_colesterol[nivel_colesterol]["total"] += 1
+        if temDoenca[i] == "1":
+            conta_colesterol[nivel_colesterol]["doentes"] += 1
+    
+    for nivel, valores in conta_colesterol.items():
+        proporcao = valores["doentes"] / valores["total"]
+        print(f"Nível de colesterol {nivel}-{nivel+9}:")
+        print(f"Total de pacientes: {valores['total']}")
+        print(f"Total de pacientes com doença: {valores['doentes']}")
+        print(f"Proporção de pacientes com doença: {proporcao:.2%}")
 
 
 
