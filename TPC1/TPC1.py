@@ -122,7 +122,8 @@ def distNivelColestrol(colesterol,temDoenca):
         conta_colesterol[nivel_colesterol]["total"] += 1
         if temDoenca[i] == "1":
             conta_colesterol[nivel_colesterol]["doentes"] += 1
-    
+
+
     for nivel, valores in conta_colesterol.items():
         proporcao = valores["doentes"] / valores["total"]
         print(f"Nível de colesterol {nivel}-{nivel+9}:")
