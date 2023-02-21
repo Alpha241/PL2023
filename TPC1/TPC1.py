@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 
 def main():
     idade = dict()
@@ -22,11 +24,22 @@ def main():
                 batimento[key] = paciente[4]
                 temDoenca[key] = paciente[5]
                 key += 1
+    
+    print("""
+    1-Distribuição da doença por sexo.
+    2-Distribuição da doença por escalões etários.
+    3-Distribuição da doença por níveis de colesterol.
+    """)
+    opcao = input("Digite a opção: ")
 
-    distNivelColestrol(colesterol,temDoenca)
-
-        
-            
+    if opcao == "1":
+        distDoencaSexo(sexo,temDoenca)
+    elif opcao == "2":
+        distDoencaIdade(idade,temDoenca)
+    elif opcao == "3":
+        distNivelColestrol(colesterol,temDoenca)
+    else:
+        print("Opção inválida!!")
 
             
     
@@ -74,6 +87,7 @@ def distDoencaSexo(sexo,temDoenca):
     print(f"Proporção de homens com a doença: {proporcao_doencas_homens:.2%}")
     print(f"Proporção de mulheres com a doença: {proporcao_doencas_mulheres:.2%}")
 
+    
 
 def distDoencaIdade(idade,temDoenca):
     total_doentes = 0
@@ -105,11 +119,12 @@ def distDoencaIdade(idade,temDoenca):
             conta_idade[faixa_etaria] += 1
             total_doentes += 1
 
-    
     print('Distribuição de doença por faixa etária:')
     for faixa_etaria in conta_idade:
         proporcao = conta_idade[faixa_etaria]/total_doentes
         print(f'{faixa_etaria}: {proporcao:.2%}')
+
+    return conta_idade
 
 def distNivelColestrol(colesterol,temDoenca):
     conta_colesterol = {}
@@ -131,19 +146,33 @@ def distNivelColestrol(colesterol,temDoenca):
         print(f"Total de pacientes com doença: {valores['doentes']}")
         print(f"Proporção de pacientes com doença: {proporcao:.2%}")
 
+    return conta_colesterol
 
+def desenhaTabelaDist(a,func):
+    celulas = []
 
+    w = max([len(func)]) + 1
+    w2 = len(str(max(func))) 
+
+    for header, value in list(func.items()):
+        w = len(header)
+        v = str(value)
+        s1 = "+ " + "-"*w + " + " + "-"*w2 + " +\n"
+        s2 = "| " + header + " | " + v + " "*(w2-len(v)) + " |"
+        celulas.append(s1 + s2)
+    
+    celulas[-1] += "\n+ " + "-"*w + " + " + "-"*w2 + " +\n"
+    
+    for celula in celulas:
+        print(celula)
+
+def desenhaGraficos(dist):
+    plt.style.use('_mpl-gallery')
+
+    fig = plt.figure(figsize= (15, 10))
+
+    plt.bar(dist.keys(), dist.values(), color = 'green', width=0.5)
+
+    plt.show()
 
 main()
-
-
-
-
-
-
-
-
-
-
-
-
