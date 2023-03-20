@@ -3,7 +3,7 @@ class CabineTelefonica:
         self.saldo = 0.0
         self.estado = 'INATIVO'
         self.numero = ''
-        self.valor_moedas_validas = ["10c", "20c", "50c", "1e", "2"]
+        self.valor_moedas_validas = [0.10, 0.20, 0.50, 1.0, 2.0]
         self.moedas_inseridas = []
 
     def valida_moedas(self, lista_moedas):
@@ -34,7 +34,7 @@ class CabineTelefonica:
                 self.saldo = sum(self.moedas_inseridas)
                 return f"Saldo atual: {self.saldo:.2f} euros. Digite o número de telefone ou comandos como 'POUSAR' ou 'ABORTAR'."
             else:
-                return "Moedas inválidas. Insira apenas moedas de 10, 20, 50 centavos, 1 ou 2 euros."
+                return "Moedas inválidas. Insira apenas moedas de 10, 20, 50 centimos, 1 ou 2 euros."
         elif comando == 'ABORTAR':
             return self.retorna_moedas()
         else:
